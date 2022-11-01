@@ -2,8 +2,12 @@ import { Icon } from '@mui/material';
 import React from 'react';
 import styled from "styled-components";
 import { db } from '../firebase';
+import { useDispatch } from 'react-redux'
+import { enterRoom } from '../features/appSlice';
 
-function SideBarOptions({Icon, title, addChannelOption}) {
+function SideBarOptions({Icon, title, addChannelOption, id}) {
+    const dispatch = useDispatch();
+
     const addChannel = (params) => {
         const channelName = prompt("Please enter the channel name");
         if (channelName) {
@@ -14,7 +18,12 @@ function SideBarOptions({Icon, title, addChannelOption}) {
     }
 
     const SelectChannel = (params) => {
-        
+        // on Select we should push the roomId into the redux store
+        if (id) {
+            dispatch(enterRoom({
+                roomId: id
+            }))
+        }
     }
 
     return (  
@@ -26,7 +35,7 @@ function SideBarOptions({Icon, title, addChannelOption}) {
                     (<h3>{title}</h3>)
                 :
                     (<SideBarOptionChannel>
-                        <span>#{title}</span>
+                        <span>#</span> {title}
                     </SideBarOptionChannel>)
             }
         </SideBarOptionsContainer>
@@ -55,4 +64,8 @@ const SideBarOptionsContainer = styled.div`
         padding: 15px;
     }
     `
-const SideBarOptionChannel = styled.div``
+const SideBarOptionChannel = styled.h3`
+    padding: 10px 0;
+    font-weight: 300;
+
+`
