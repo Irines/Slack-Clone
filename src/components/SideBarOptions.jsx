@@ -28,7 +28,7 @@ function SideBarOptions({Icon, title, addChannelOption, id}) {
 
     return (  
         <SideBarOptionsContainer onClick={addChannelOption ? addChannel : SelectChannel}>
-            {Icon && <Icon fontsize="small" style={{padding: 10}} />}
+            {Icon && <Icon fontSize="small" style={{padding: 10}} />}
             {
                 Icon 
                 ?

@@ -14,11 +14,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
 import SideBarOptions from './SideBarOptions';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function SideBar() {
     const [channels, loading, error] = useCollection(db.collection('rooms'))
-
+    const [user] = useAuthState(auth);
     return ( 
         <SideBarContainer>
             <SideBarHeader>
@@ -26,7 +27,7 @@ function SideBar() {
                     <h2>Project name</h2>
                     <h3>
                         <FiberManualRecordIcon></FiberManualRecordIcon>
-                        mkmknk
+                        {user.displayName}
                     </h3>
                 </SideBarInfo>
                 <CreateIcon></CreateIcon>

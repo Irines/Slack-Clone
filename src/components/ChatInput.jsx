@@ -1,11 +1,12 @@
 import { Button } from '@mui/material';
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import { db } from '../firebase';
+import { auth, db } from '../firebase';
 import firebase from 'firebase/compat/app';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-function ChatInput({channelId, channelName}) {
-    console.log("channelId",channelId)
+function ChatInput({channelId, channelName, chatRef}) {
+    const [user] = useAuthState(auth);
     const inputRef = useRef(null)
     const sendMessage = (e) => {
         // default - on enter key in form page i s refreshed
@@ -17,8 +18,12 @@ function ChatInput({channelId, channelName}) {
         db.collection('rooms').doc(channelId).collection('messages').add({
             message: inputRef.current.value,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            user: "Irin",
-            userImage: "https://media.newyorker.com/photos/59095c67ebe912338a37455d/master/w_2560%2Cc_limit/Stokes-Hello-Kitty2.jpg"
+            user: user.displayName,
+            userImage: user.photoURL
+        })
+
+        chatRef.current.scrollIntoView({
+            behavior: "smooth"
         })
 
         inputRef.current.value = ""
@@ -26,7 +31,7 @@ function ChatInput({channelId, channelName}) {
     return (
         <ChatInputContainer>
             <form>
-                <input ref={inputRef} placeholder={`Message#`}></input>
+                <input ref={inputRef} placeholder={`Message #${channelName}`}></input>
                 {/* in form if we have hidden button with type=submit on enter key button will be submitted */}
                 <Button hidden type="submit" onClick={sendMessage}>SEND</Button>
             </form>
