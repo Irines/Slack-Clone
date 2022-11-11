@@ -47,11 +47,11 @@ const LoginInnerContainer = styled.div`
     > button {
         margin-top: 50px;
         text-transform: inherit;
-        background-color: green;
+        background-color: #18873b;
         color: white;
     }
 
     > button:hover {
-        background-color:  green;
+        background-color:  #2aa14f;
     }
 `

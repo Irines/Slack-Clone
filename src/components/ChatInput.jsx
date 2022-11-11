@@ -9,9 +9,9 @@ function ChatInput({channelId, channelName, chatRef}) {
     const [user] = useAuthState(auth);
     const inputRef = useRef(null)
     const sendMessage = (e) => {
-        // default - on enter key in form page i s refreshed
+        // default - on enter key in form page is refreshed
         e.preventDefault()
-        if(!channelId) {
+        if(!channelId || !inputRef.current.value) {
             return false;
         }
 

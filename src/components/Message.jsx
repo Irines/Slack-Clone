@@ -2,26 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function Message({message, user, userImage, timestamp}) {
-    const convertTimestampToDate = (timestamp) => {
-        console.log("date computition")
-        return timestamp ? new Date(timestamp.seconds * 1000) : null
-    }
-
-    const [date, setDate] = useState(() => {
-        const initialState = convertTimestampToDate(timestamp);
-        return initialState;
-    })
-
     const [dateFormat, setDateFormat] = useState(null)
 
     useEffect(()=> {
-        // console.log("date", date)
-        if (date) {
+        console.log('useeffect + timestamp', timestamp)
+        if (timestamp) {
+            let date = new Date(timestamp.seconds * 1000)
             let dateToFormat = date.getHours() + ':' + date.getMinutes() + ' ' + date.toDateString();
             console.log("dateFormat", dateToFormat)
             setDateFormat(date.getHours() + ':' + date.getMinutes() + ' ' + date.toDateString())
         }
-    }, [date])
+    }, [timestamp])
 
     return ( 
         <MessageContainer>
@@ -31,7 +22,6 @@ function Message({message, user, userImage, timestamp}) {
                     {user}{' '}
                     <span>
                         {dateFormat}
-                        {/* {new Date(timestamp?.seconds?.toDate().toUTCString())} */}
                     </span>
                 </h4>
                 <p>{message}</p>
