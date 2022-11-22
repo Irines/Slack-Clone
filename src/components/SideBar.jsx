@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
 import CreateIcon from '@mui/icons-material/Create';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
@@ -19,7 +19,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 function SideBar() {
     const [channels, loading, error] = useCollection(db.collection('rooms'))
-    const [user] = useAuthState(auth);
+    const [user] = useAuthState(auth); 
+    const [showChannels, setShowChannels] = useState(false);
+
+    const onChannelArrowClick = () => {
+        console.log("click!")
+        setShowChannels(showChannels => !showChannels)
+    }
+
     return ( 
         <SideBarContainer>
             <SideBarHeader>
@@ -41,12 +48,17 @@ function SideBar() {
             <SideBarOptions Icon={FileCopyIcon} title="File browser"/>
             <SideBarOptions Icon={ExpandLessIcon} title="Show less"/>
             <hr/>
-            <SideBarOptions Icon={ExpandMoreIcon} title="Channels"/>
+            <SideBarOptions Icon={ExpandMoreIcon} title="Channels" isChannelOption={true} onChannelArrowClick={onChannelArrowClick}/>
             <hr/>
             <SideBarOptions Icon={AddIcon} addChannelOption title="Add channel"/>
-            {channels?.docs.map((doc) => (
-                <SideBarOptions key={doc.id} id={doc.id} title={doc.data().name}/>
-            ))}
+            {
+                showChannels ?
+                    channels?.docs.map((doc) => (
+                        <SideBarOptions key={doc.id} id={doc.id} title={doc.data().name}/>
+                    ))
+                : null
+            }
+
         </SideBarContainer>
      );
 }

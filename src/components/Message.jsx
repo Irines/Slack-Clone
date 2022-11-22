@@ -44,11 +44,25 @@ const MessageContainer = styled.div`
 `
 const MessageInfo = styled.div`
     padding-left: 10px;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    > h4 {
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
 
     > h4 >span {
         color: gray;
         font-weight: 300;
         margin-left: 4px;
         font-size: 12px;
+    }
+
+    >p {
+        color: #616061;
+        font-weight: 400;
     }
 `

@@ -53,11 +53,31 @@ const ChatInputContainer = styled.div`
     > form > input {
         position: fixed;
         bottom: 30px;
-        width: 60%;
-        border: 1px solid gray;
-        border-radius: 3px;
+        width: 30%; //change width responsively to screen width
+        border: 1px solid #b3b3b3;
+        border-radius: 8px;
         padding: 20px;
+        left: 260px;
+        margin-left: 20px;
+        height: 20px;
         outline: none;
+        color: var(--slack-color);
+
+        @media (min-width: 1366px) {
+            width: 80%;
+        }
+
+        @media (min-width: 1024px) and (max-width: 1366px){
+            width: 72%;
+        }
+
+        @media (max-width: 1024px){
+            width: 30%;
+        }
+
+        @media (min-width: 2100px) {
+            width: 85%;
+        }
     }
 
     > form > button {
