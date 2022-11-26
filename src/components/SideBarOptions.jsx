@@ -4,8 +4,9 @@ import styled from "styled-components";
 import { db } from '../firebase';
 import { useDispatch } from 'react-redux'
 import { enterRoom } from '../features/appSlice';
+import { Link } from 'react-router-dom';
 
-function SideBarOptions({Icon, title, addChannelOption, id, isChannelOption, onChannelArrowClick}) {
+function SideBarOptions({Icon, title, addChannelOption, id, isChannelOption, handleChannelsShowClick, handleShowLessClick, showLessOption, isPeopleOption}) {
     const dispatch = useDispatch();
 
     const addChannel = (params) => {
@@ -27,20 +28,31 @@ function SideBarOptions({Icon, title, addChannelOption, id, isChannelOption, onC
     }
 
     const openChannels = () => {
-        onChannelArrowClick();
+        handleChannelsShowClick();
+    }
+
+    const showLessChannels = () => {
+        handleShowLessClick();
+    }
+
+    const openPeopleContainer = (params) => {
+        // change Route to People container
     }
 
     return (  
-        <SideBarOptionsContainer onClick={isChannelOption ? openChannels : addChannelOption ? addChannel : SelectChannel}>
+        <SideBarOptionsContainer onClick={isPeopleOption? openPeopleContainer : showLessOption ? showLessChannels : isChannelOption ? openChannels : addChannelOption ? addChannel : SelectChannel}>
             {Icon && <Icon fontSize="small" style={{padding: 10}} />}
             {
-                Icon 
-                ?
-                    (<h3>{title}</h3>)
+                isPeopleOption ?
+                    <Link to={`/people`}><h3>{title}</h3></Link>
                 :
-                    (<SideBarOptionChannel>
-                        <span>#</span> {title}
-                    </SideBarOptionChannel>)
+                    Icon 
+                    ?
+                        (<h3>{title}</h3>)
+                    :
+                        (<SideBarOptionChannel>
+                            <span>#</span> {title}
+                        </SideBarOptionChannel>)
             }
         </SideBarOptionsContainer>
     );

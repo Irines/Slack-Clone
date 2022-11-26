@@ -34,7 +34,7 @@ export default Message;
 
 const MessageContainer = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     padding: 20px;
 
     > img {
@@ -44,7 +44,7 @@ const MessageContainer = styled.div`
 `
 const MessageInfo = styled.div`
     padding-left: 10px;
-    height: 50px;
+    min-height: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

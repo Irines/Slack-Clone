@@ -16,14 +16,19 @@ function Header() {
                     src={user?.photoURL}
                     alt={user?.displayName}
                 />
-                <AccessTimeIcon></AccessTimeIcon>
+                <IconTimeWrapper>
+                    {/* TODO: check on hover icon design */}
+                    <AccessTimeIcon></AccessTimeIcon>
+                </IconTimeWrapper>
             </HeaderLeft>
             <HeaderSearch>
                 <SearchIcon></SearchIcon>
                 <input placeholder="Search something"></input>
             </HeaderSearch>
             <HeaderRight>
-                <HelpIcon></HelpIcon>
+                <IconHelpWrapper>                
+                    <HelpIcon></HelpIcon>
+                </IconHelpWrapper>
             </HeaderRight>
         </HeaderComponent>
     );
@@ -31,9 +36,44 @@ function Header() {
 
 export default Header;
 
+const IconHelpWrapper = styled.div`
+    background-color: var(--slack-color);
+    height: 26px;
+    width: 26px;
+    border-radius: 6px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    :hover {
+        opacity: 1;
+        background-color: var(--slack-lighter);
+    }
+`
+
+const IconTimeWrapper = styled.div`
+    margin-left: auto;
+    margin-right: 20px;
+    margin-left: auto;
+    background-color: var(--slack-color);
+    height: 26px;
+    width: 26px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    :hover {
+        opacity: 1;
+        background-color: var(--slack-lighter);
+    }
+`
+
 const HeaderComponent = styled.div`
     display: flex;
     position: fixed;
+    height: 40px;
     width: 100%;
     align-items: center;
     color:white;
@@ -46,13 +86,11 @@ const HeaderLeft = styled.div`
     display: flex;
     align-items: center;
     margin-left: 20px;
-    > .MuiSvgIcon-root {
-        margin-left: auto;
-        margin-right: 30px;
-    }
 `
 const HeaderAvatar = styled(Avatar)`
     cursor: pointer;
+    height: 26px !important;
+    width: 26px !important;
     :hover {
         opacity: 0.8;
     }
@@ -62,26 +100,26 @@ const HeaderSearch = styled.div`
     opacity: 1;
     border-radius: 6px;
     display: flex;
-    text-align: center;
+    align-items: center;
     padding: 0 50px;
-    color: grey;
-    border: 1px solid grey;
-    background-color: #6d3b75;
+    height: 26px;
+    color: white;
+    /* border: 1px solid grey; */
+    background-color: var(--slack-lighter);
     > input {
         background-color: transparent;
         border: none;
         text-align: center;
         outline: 0;
-        color:white;
+        color: white;
         min-width: 30vw;
+        ::placeholder {
+            color: white;
+        }
     }
 `
 const HeaderRight = styled.div`
     flex: 0.3;
     display: flex;
     align-items: flex-end;
-    > .MuiSvgIcon-root {
-        margin-left: auto;
-        margin-right: 20px;
-    }
 `

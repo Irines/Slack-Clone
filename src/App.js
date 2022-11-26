@@ -14,6 +14,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebase';
 import Login from './components/Login';
 import Spinner from "react-spinkit";
+import People from './components/People';
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -42,9 +43,8 @@ function App() {
                   <AppBody>
                     <SideBar/>
                     <Routes>
-                      <Route path="/" element={<Chat/>}>
-                        {/* <Home /> */}
-                      </Route>
+                      <Route path="/" element={<Chat/>}></Route>
+                      <Route path="/people" element={<People/>}></Route>
                     </Routes>
                   </AppBody>
             </>
