@@ -1,12 +1,28 @@
 import { Button } from '@mui/material';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { logIn } from '../features/appSlice';
 import { auth, provider } from '../firebase';
 
 function Login() {
+    const dispatch = useDispatch();
+
     const signIn = (e) => {
         e.preventDefault()
-        auth.signInWithPopup(provider).catch((error) => {
+        auth.signInWithPopup(provider)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log("user logged in", user)
+            console.log("user id", user.uid)
+            if (user) {
+                dispatch(logIn({
+                    userId: user.uid
+                }))
+            }
+          })
+          .catch((error) => {
             console.log(error)
         })
     }

@@ -45,14 +45,16 @@ function SideBarOptions({Icon, title, addChannelOption, id, isChannelOption, han
             {
                 isPeopleOption ?
                     <Link to={`/people`}><h3>{title}</h3></Link>
-                :
+                : 
                     Icon 
                     ?
                         (<h3>{title}</h3>)
                     :
-                        (<SideBarOptionChannel>
-                            <span>#</span> {title}
-                        </SideBarOptionChannel>)
+                        (
+                            <SideBarOptionChannel>
+                                <span>#</span> <Link to={`/`}>{title}</Link>
+                            </SideBarOptionChannel>
+                        )
             }
         </SideBarOptionsContainer>
     );

@@ -15,10 +15,13 @@ export const appSlice = createSlice({
     enterRoom: (state, action) => {
       state.roomId = action.payload.roomId;
     },
+    logIn: (state, action) => {
+      state.userId = action.payload.userId;
+    }
   },
 });
 
-export const { enterRoom } = appSlice.actions;
+export const { enterRoom, logIn } = appSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -26,5 +29,6 @@ export const { enterRoom } = appSlice.actions;
 
 // selectors
 export const selectRoomId = (state) => state.app.roomId;
+export const selectUserId = (state) => state.app.userId;
 
 export default appSlice.reducer;
