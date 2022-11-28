@@ -1,4 +1,7 @@
 Hosting URL: https://slack-app-clone-5f423.web.app
+
+This project is a Slack app clone with my upgrades (made with Redux, styled components & Firebase HOOKS functionality & Firebase Realtime Database back end).
+
 ![image](https://user-images.githubusercontent.com/48406339/204274054-09498128-b156-4724-8856-b433ab5706ff.png)
 ![image](https://user-images.githubusercontent.com/48406339/204274124-0d143d15-95e2-42a9-810e-68c0c45f3c03.png)
 ![image](https://user-images.githubusercontent.com/48406339/204274214-3515e82d-3bdc-4f76-8d2b-403eeaaa5728.png)
