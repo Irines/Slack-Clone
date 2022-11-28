@@ -1,46 +1,17 @@
-# Getting Started with Create React App and Redux
+Hosting URL: https://slack-app-clone-5f423.web.app
+![image](https://user-images.githubusercontent.com/48406339/204274054-09498128-b156-4724-8856-b433ab5706ff.png)
+![image](https://user-images.githubusercontent.com/48406339/204274124-0d143d15-95e2-42a9-810e-68c0c45f3c03.png)
+![image](https://user-images.githubusercontent.com/48406339/204274214-3515e82d-3bdc-4f76-8d2b-403eeaaa5728.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Messages, logged in users and project name are stored in Google Firebase Realtime Database.
 
-## Available Scripts
+![image](https://user-images.githubusercontent.com/48406339/204275185-50eb489e-d40e-4f41-b5e1-bc882926ea09.png)
 
-In the project directory, you can run:
+![image](https://user-images.githubusercontent.com/48406339/204274343-98176b64-becf-4a76-a692-d0539b3dbc45.png)
+![image](https://user-images.githubusercontent.com/48406339/204274541-796cfbd3-7257-44bf-bd60-5b8492913059.png)
+![image](https://user-images.githubusercontent.com/48406339/204274688-5d48f967-9189-474d-9cb3-884423d96dae.png)
+![image](https://user-images.githubusercontent.com/48406339/204274735-93314c56-0711-4199-bc7a-daca01b07c28.png)
 
-### `npm start`
+I will add private chats with logged in users soon.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
