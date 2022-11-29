@@ -4,6 +4,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../firebase';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import QueueOutlinedIcon from '@mui/icons-material/QueueOutlined';
+import SkeletonElement from './SkeletonElement';
 
 function Files() {
     console.log("Files")
@@ -12,12 +14,29 @@ function Files() {
         <PeopleContainer>
             <PeopleHeader>
                 <HeaderLeft>
-                    <h4>Uploaded files</h4>
+                    <h4>Files</h4>
                     <FolderOpenIcon style={{fill: "#6e6e6e"}}></FolderOpenIcon>
                 </HeaderLeft>
             </PeopleHeader>
+
             <ListContainer>
+                <AddFilesRow>
+                    <h4>Upload Files</h4>
+                    <QueueOutlinedIcon style={{fill: "#6e6e6e"}}></QueueOutlinedIcon>
+                </AddFilesRow>
                 <List>
+                    <Row>
+                        <RowElement><SkeletonElement/></RowElement>
+                        <RowElement><SkeletonElement/></RowElement>
+                        <RowElement><SkeletonElement/></RowElement>
+                        <RowElement><SkeletonElement/></RowElement>
+                    </Row>
+                    <Row>
+                        <RowElement><SkeletonElement/></RowElement>
+                        <RowElement><SkeletonElement/></RowElement>
+                        <RowElement><SkeletonElement/></RowElement>
+                        <RowElement><SkeletonElement/></RowElement>
+                    </Row>
                 </List>
             </ListContainer>
         </PeopleContainer>
@@ -32,6 +51,7 @@ const PeopleContainer = styled.div`
     flex-grow: 1;
     margin-top: 60px;
     width: 100%;
+    height: 100%;
     margin-bottom: 90px;
 `
 
@@ -63,20 +83,40 @@ const ListContainer = styled.div`
 `
 
 const List = styled.div`
-    height: 50%;
-    width: 30%;
+    height: 100%;
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    padding-top: 20px;
+`
+
+const AddFilesRow = styled.div`
+    padding-left: 10px;
+    display: flex;
     border-radius: 6px;
-    border: 1px solid lightgrey;
+    border: 1px dashed var(--medium-grey);
+    height: 60px;
+    align-items: center;
+    margin-bottom: 20px;
+    > h4 {
+        margin-right: 10px;
+        font-weight: 400;
+        color: var(--medium-grey);
+    }
+    /* :hover {
+        background-color: #edebeb;
+    } */
 `
 
 const Row = styled.div`
-    padding-left: 10px;
     display: flex;
-    /* border-bottom: 1px solid lightgrey; */
-    height: 60px;
-    align-items: center;
-    font-weight: 300;
-    :hover {
-        background-color: #edebeb;
-    }
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+`
+
+const RowElement = styled.div`
+    flex-grow: 0;
+    width: 20%;
+    height: 180px;
+    /* background-color: #edebeb; */
 `
