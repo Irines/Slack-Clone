@@ -3,43 +3,28 @@ import styled from 'styled-components';
 import GroupIcon from '@mui/icons-material/Group';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../firebase';
-import { Avatar, Skeleton } from '@mui/material';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 
-function People() {
+function Files() {
+    console.log("Files")
     const [users, loading, error] = useCollection(db.collection('users'))
     return (  
         <PeopleContainer>
             <PeopleHeader>
                 <HeaderLeft>
-                    <h4>Users</h4>
-                    <GroupIcon style={{fill: "#6e6e6e"}}></GroupIcon>
+                    <h4>Uploaded files</h4>
+                    <FolderOpenIcon style={{fill: "#6e6e6e"}}></FolderOpenIcon>
                 </HeaderLeft>
             </PeopleHeader>
             <ListContainer>
                 <List>
-                    {
-                        loading 
-                        ?
-                            null
-                        :
-                        users?.docs.map((user) => (
-                            console.log("USER", user.data()),
-                            <Row key={user.id}>
-                                <HeaderAvatar
-                                    src={user.data().photoUrl}
-                                    alt={user.data().userName}
-                                />
-                                <UserInfo>{user.data().userName}</UserInfo>
-                            </Row>
-                        ))
-                    }
                 </List>
             </ListContainer>
         </PeopleContainer>
     );
 }
 
-export default People;
+export default Files;
 
 const PeopleContainer = styled.div`
     flex: 0.7;
@@ -60,8 +45,8 @@ const HeaderLeft = styled.div`
     display: flex;
     align-items: center;
     > h4 {
-        color: var(--medium-grey);
         font-weight: 600;
+        color: var(--medium-grey);
         margin-right: 10px;
         display: flex;
         text-transform: lowercase;
@@ -94,17 +79,4 @@ const Row = styled.div`
     :hover {
         background-color: #edebeb;
     }
-`
-
-const HeaderAvatar = styled(Avatar)`
-    cursor: pointer;
-    :hover {
-        opacity: 0.8;
-    }
-`
-
-const UserInfo = styled.div`
-    color: var(--medium-grey);
-    padding-left: 14px;
-    font-weight: 400;
 `

@@ -8,7 +8,7 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import AppsIcon from '@mui/icons-material/Apps';
-import FileCopyIcon from '@mui/icons-material/FileCopy';
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AddIcon from '@mui/icons-material/Add';
@@ -85,18 +85,18 @@ function SideBar() {
                 <CreateIcon onClick={openEditNameModal}></CreateIcon>
                 <MemoizedEditProjectName open={openModal} setOpen={setOpenModal} name={projectName} handleNameEdit={handleNameEdit}/>
             </SideBarHeader>
-            <SideBarOptions Icon={InsertCommentIcon} title="Threads"/>
-            <SideBarOptions Icon={InboxIcon} title="Mentions & reactions"/>
-            <SideBarOptions Icon={DraftsIcon} title="Saved items"/>
-            <SideBarOptions Icon={BookmarkBorderIcon} title="Channel browser"/>
+            {/* <SideBarOptions Icon={InsertCommentIcon} title="Threads"/>
+            <SideBarOptions Icon={InboxIcon} title="Mentions & reactions"/> */}
+            {/* <SideBarOptions Icon={DraftsIcon} title="Saved items"/> */}
+            {/* <SideBarOptions Icon={BookmarkBorderIcon} title="Channel browser"/> */}
             <SideBarOptions Icon={PeopleAltIcon} title="People & user groups" isPeopleOption={true}/>
             {
                 showLess ?
                     <SideBarOptions Icon={ExpandMoreIcon} title="Show more" showLessOption={true} handleShowLessClick={handleShowLessClick}/>
                 :
                 <>
-                    <SideBarOptions Icon={AppsIcon} title="Apps"/>
-                    <SideBarOptions Icon={FileCopyIcon} title="File browser"/>
+                    {/* <SideBarOptions Icon={AppsIcon} title="Apps"/> */}
+                    <SideBarOptions Icon={FolderOpenIcon} title="File browser" isFilesOption={true}/>
                     <SideBarOptions Icon={ExpandLessIcon} title="Show less" showLessOption={true} handleShowLessClick={handleShowLessClick}/>
                 </>
             }

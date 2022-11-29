@@ -50,7 +50,8 @@ const MessageInfo = styled.div`
     justify-content: space-between;
 
     > h4 {
-        font-weight: 700;
+        color: var(--medium-grey);
+        font-weight: 600;
         margin-bottom: 10px;
     }
 

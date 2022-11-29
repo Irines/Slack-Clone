@@ -1,12 +1,14 @@
 import { Button } from '@mui/material';
 import React from 'react';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { logIn } from '../features/appSlice';
-import { auth, provider } from '../firebase';
+import { auth, db, provider } from '../firebase';
 
 function Login() {
     const dispatch = useDispatch();
+    const [users, loading, error] = useCollection(db.collection('users'))
 
     const signIn = (e) => {
         e.preventDefault()
@@ -20,6 +22,15 @@ function Login() {
                 dispatch(logIn({
                     userId: user.uid
                 }))
+                let isUserRegistered = users.filter((doc) => user.email == doc.data().email)
+                if (!isUserRegistered) {
+                    db.collection('users').add({
+                        userId: user.uid,
+                        userName: user.displayName,
+                        email: user.email,
+                        photoUrl: user.photoURL
+                    })
+                }
             }
           })
           .catch((error) => {

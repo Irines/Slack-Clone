@@ -15,6 +15,7 @@ import { auth } from './firebase';
 import Login from './components/Login';
 import Spinner from "react-spinkit";
 import People from './components/People';
+import Files from './components/Files';
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -45,6 +46,7 @@ function App() {
                     <Routes>
                       <Route path="/" element={<Chat/>}></Route>
                       <Route path="/people" element={<People/>}></Route>
+                      <Route path="/files" element={<Files/>}></Route>
                     </Routes>
                   </AppBody>
             </>

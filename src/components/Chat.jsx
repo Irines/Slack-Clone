@@ -31,8 +31,8 @@ function Chat() {
                 <>
                     <ChatHeader>
                         <HeaderLeft>
-                            <h4><strong>#{roomDetails?.data().name}</strong></h4>
-                            <StarOutlineIcon></StarOutlineIcon>
+                            <h4>#{roomDetails?.data().name}</h4>
+                            <StarOutlineIcon style={{fill: "#6e6e6e"}}></StarOutlineIcon>
                         </HeaderLeft>
                         <HeaderRight>
                             <p>
@@ -89,6 +89,8 @@ const HeaderLeft = styled.div`
     display: flex;
     align-items: center;
     > h4 {
+        color: var(--medium-grey);
+        font-weight: 600;
         margin-right: 10px;
         display: flex;
         text-transform: lowercase;
