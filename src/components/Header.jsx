@@ -1,13 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import {Avatar} from "@mui/material"
+import {Avatar, Typography} from "@mui/material"
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import SearchIcon from '@mui/icons-material/Search';
 import HelpIcon from '@mui/icons-material/Help';
 import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Popover from '@mui/material/Popover';
+import PopupBox from './modals/PopupBox';
+
 function Header() {
     const [user] = useAuthState(auth);
+    
+    const usePopup = (initialValue) => {
+        const [anchorEl, setAnchorEl] = useState(initialValue);
+    
+        const handlePopoverOpen = (event) => {
+            setAnchorEl(event.currentTarget);
+        };
+
+        const handlePopoverClose = () => {
+            setAnchorEl(null);
+        };
+    
+        return {
+            anchorEl,
+            handlePopoverOpen: handlePopoverOpen,
+            handlePopoverClose: handlePopoverClose,
+        };
+    };
+
+    const popupHelp = usePopup(null)
+    const popupHistory = usePopup(null)
+    const popupSearch = usePopup(null)
+
+    const openHelpPopover = Boolean(popupHelp.anchorEl);
+    const openHistoryPopover = Boolean(popupHistory.anchorEl);
+    const openSearchPopover = Boolean(popupSearch.anchorEl);
+
     return (  
         <HeaderComponent>
             <HeaderLeft>
@@ -16,19 +46,32 @@ function Header() {
                     src={user?.photoURL}
                     alt={user?.displayName}
                 />
-                <IconTimeWrapper>
-                    {/* TODO: check on hover icon design */}
+                <IconTimeWrapper         
+                    onMouseEnter={popupHistory.handlePopoverOpen}
+                    onMouseLeave={popupHistory.handlePopoverClose}
+                >
                     <AccessTimeIcon></AccessTimeIcon>
                 </IconTimeWrapper>
+                <PopupBox open={openHistoryPopover} handlePopoverClose={popupHistory.handlePopoverClose} anchorEl={popupHistory.anchorEl} content="History"/>
             </HeaderLeft>
-            <HeaderSearch>
+            <HeaderSearch
+                onMouseEnter={popupSearch.handlePopoverOpen}
+                onMouseLeave={popupSearch.handlePopoverClose}
+            >
                 <SearchIcon></SearchIcon>
-                <input placeholder="Search something"></input>
+                <input 
+                    placeholder="Search something"
+                ></input>
             </HeaderSearch>
+            <PopupBox open={openSearchPopover} handlePopoverClose={popupSearch.handlePopoverClose} anchorEl={popupSearch.anchorEl} content="Search in the workspace"/>
             <HeaderRight>
-                <IconHelpWrapper>                
+                <IconHelpWrapper
+                    onMouseEnter={popupHelp.handlePopoverOpen}
+                    onMouseLeave={popupHelp.handlePopoverClose}
+                >                
                     <HelpIcon></HelpIcon>
                 </IconHelpWrapper>
+                <PopupBox open={openHelpPopover} handlePopoverClose={popupHelp.handlePopoverClose} anchorEl={popupHelp.anchorEl} content="Help"/>
             </HeaderRight>
         </HeaderComponent>
     );
@@ -104,7 +147,7 @@ const HeaderSearch = styled.div`
     padding: 0 50px;
     height: 26px;
     color: white;
-    /* border: 1px solid grey; */
+    cursor: pointer;
     background-color: var(--slack-lighter);
     > input {
         background-color: transparent;

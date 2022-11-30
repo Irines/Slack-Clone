@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
-import InfoIcon from '@mui/icons-material/Info';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ChatInput from './ChatInput';
 import { useSelector } from 'react-redux';
 import { selectRoomId } from '../features/appSlice';
@@ -36,7 +36,7 @@ function Chat() {
                         </HeaderLeft>
                         <HeaderRight>
                             <p>
-                                <InfoIcon></InfoIcon>
+                                <InfoOutlinedIcon></InfoOutlinedIcon>
                                 Details
                             </p>
                         </HeaderRight>
@@ -103,6 +103,8 @@ const HeaderLeft = styled.div`
 `
 const HeaderRight = styled.div`
     > p {
+        color: var(--medium-grey);
+        font-weight: 600;
         display: flex;
         align-items: center;
         font-size: 14px;
