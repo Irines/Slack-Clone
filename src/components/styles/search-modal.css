@@ -1,0 +1,100 @@
+.MuiPaper-root.MuiDialog-paper {
+    position: fixed;
+    top: 10px;
+    margin-top: 0px;
+    min-width: 50%;
+}
+
+.MuiPaper-root.MuiDialog-paper > h2 {
+    border-bottom: 1px solid lightgrey;
+}
+
+.row {
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    height: 26px;
+    color: var(--medium-grey);
+    cursor: pointer;
+    justify-content: flex-start;
+}
+
+.row > input {
+    padding-left: 20px;
+    background-color: transparent;
+    color: var(--medium-grey);
+    font-size: 15px;
+    border: none;
+    /* text-align: center; */
+    outline: 0;
+    min-width: 30vw;
+
+}
+
+.row > input::placeholder {
+    color: var(--medium-grey);
+}
+
+.row > p {
+    margin-right: 30px;
+    margin-left: auto;
+    font-size: 14px;
+    padding-right: 6px;
+    border-right: 1px solid lightgrey;
+}
+
+.btn-search {
+    margin-top: 8px;
+    background-color: #1264a3;
+    color: #fff;
+    font-size: 15px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 16px;
+    cursor: pointer;
+}
+
+.btn-search > p {
+    padding-left: 20px;
+}
+
+.options {
+    margin-top: 12px;
+    padding: 0px 16px;
+    color: var(--medium-grey);
+    font-size: 12px;
+}
+
+.row-items {
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 12px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.item {
+    background-color: #cee9eb;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    padding: 6px;
+    color: #424242;
+    margin-right: 14px;
+    cursor: pointer;
+}
+
+.item:hover {
+    background-color: #1264a3;
+    color: white;
+}
+
+.item > .MuiSvgIcon-root {
+    padding-right: 6px;
+}
+
+#search-content {
+    padding: 0px;
+}

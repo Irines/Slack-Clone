@@ -1,8 +1,7 @@
 import { Popover, Typography } from '@mui/material';
 import React from 'react';
 
-export default function PopupBox({open, anchorEl, handlePopoverClose, content}) {
-    console.log("anchorEl", anchorEl)
+function PopupComponent({open, anchorEl, handlePopoverClose, content}) {
     return ( 
         <Popover
             id="mouse-over-popover"
@@ -26,3 +25,7 @@ export default function PopupBox({open, anchorEl, handlePopoverClose, content}) 
         </Popover>
      );
 }
+
+const PopupBox = React.memo(PopupComponent);
+
+export default PopupBox;

@@ -8,10 +8,12 @@ import { auth } from '../firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Popover from '@mui/material/Popover';
 import PopupBox from './modals/PopupBox';
+import SearchModal from './modals/SearchModal';
 
 function Header() {
     const [user] = useAuthState(auth);
-    
+    const [open, setOpen] = useState(false);
+
     const usePopup = (initialValue) => {
         const [anchorEl, setAnchorEl] = useState(initialValue);
     
@@ -30,6 +32,10 @@ function Header() {
         };
     };
 
+    const openSearchModal = (params) => {
+        setOpen(true);
+    }
+
     const popupHelp = usePopup(null)
     const popupHistory = usePopup(null)
     const popupSearch = usePopup(null)
@@ -38,42 +44,63 @@ function Header() {
     const openHistoryPopover = Boolean(popupHistory.anchorEl);
     const openSearchPopover = Boolean(popupSearch.anchorEl);
 
-    return (  
-        <HeaderComponent>
-            <HeaderLeft>
-                <HeaderAvatar
-                    onClick={() => auth.signOut()} 
-                    src={user?.photoURL}
-                    alt={user?.displayName}
+    return (
+        <>
+            <SearchModal open={open} setOpen={setOpen}></SearchModal>
+            <HeaderComponent>
+                <HeaderLeft>
+                    <HeaderAvatar
+                        onClick={() => auth.signOut()} 
+                        src={user?.photoURL}
+                        alt={user?.displayName}
+                    />
+                    <IconTimeWrapper         
+                        onMouseEnter={popupHistory.handlePopoverOpen}
+                        onMouseLeave={popupHistory.handlePopoverClose}
+                    >
+                        <AccessTimeIcon></AccessTimeIcon>
+                    </IconTimeWrapper>
+                    <PopupBox 
+                        open={openHistoryPopover} 
+                        handlePopoverClose={popupHistory.handlePopoverClose} 
+                        anchorEl={popupHistory.anchorEl} 
+                        content="History"
+                    />
+                </HeaderLeft>
+                <HeaderSearch>
+                    <SearchIcon></SearchIcon>
+                    <input 
+                        onMouseEnter={popupSearch.handlePopoverOpen}
+                        onMouseLeave={popupSearch.handlePopoverClose}
+                        onMouseDown={openSearchModal}
+                        type="text"
+                        // value={search}
+                        // onChange={onChangeHandler}
+                        placeholder="Search in workspace"
+                    ></input>
+                </HeaderSearch>
+                <PopupBox 
+                    open={openSearchPopover} 
+                    handlePopoverClose={popupSearch.handlePopoverClose} 
+                    anchorEl={popupSearch.anchorEl} 
+                    content="Search in the workspace"
                 />
-                <IconTimeWrapper         
-                    onMouseEnter={popupHistory.handlePopoverOpen}
-                    onMouseLeave={popupHistory.handlePopoverClose}
-                >
-                    <AccessTimeIcon></AccessTimeIcon>
-                </IconTimeWrapper>
-                <PopupBox open={openHistoryPopover} handlePopoverClose={popupHistory.handlePopoverClose} anchorEl={popupHistory.anchorEl} content="History"/>
-            </HeaderLeft>
-            <HeaderSearch
-                onMouseEnter={popupSearch.handlePopoverOpen}
-                onMouseLeave={popupSearch.handlePopoverClose}
-            >
-                <SearchIcon></SearchIcon>
-                <input 
-                    placeholder="Search something"
-                ></input>
-            </HeaderSearch>
-            <PopupBox open={openSearchPopover} handlePopoverClose={popupSearch.handlePopoverClose} anchorEl={popupSearch.anchorEl} content="Search in the workspace"/>
-            <HeaderRight>
-                <IconHelpWrapper
-                    onMouseEnter={popupHelp.handlePopoverOpen}
-                    onMouseLeave={popupHelp.handlePopoverClose}
-                >                
-                    <HelpIcon></HelpIcon>
-                </IconHelpWrapper>
-                <PopupBox open={openHelpPopover} handlePopoverClose={popupHelp.handlePopoverClose} anchorEl={popupHelp.anchorEl} content="Help"/>
-            </HeaderRight>
-        </HeaderComponent>
+                <HeaderRight>
+                    <IconHelpWrapper
+                        onMouseEnter={popupHelp.handlePopoverOpen}
+                        onMouseLeave={popupHelp.handlePopoverClose}
+                    >                
+                        <HelpIcon></HelpIcon>
+                    </IconHelpWrapper>
+                    <PopupBox 
+                        open={openHelpPopover} 
+                        handlePopoverClose={popupHelp.handlePopoverClose} 
+                        anchorEl={popupHelp.anchorEl} 
+                        content="Help"
+                    />
+                </HeaderRight>
+            </HeaderComponent>
+        </>  
     );
 }
 
