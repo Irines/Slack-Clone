@@ -5,11 +5,9 @@ function Message({message, user, userImage, timestamp}) {
     const [dateFormat, setDateFormat] = useState(null)
 
     useEffect(()=> {
-        console.log('useeffect + timestamp', timestamp)
         if (timestamp) {
             let date = new Date(timestamp.seconds * 1000)
             let dateToFormat = date.getHours() + ':' + date.getMinutes() + ' ' + date.toDateString();
-            console.log("dateFormat", dateToFormat)
             setDateFormat(date.getHours() + ':' + date.getMinutes() + ' ' + date.toDateString())
         }
     }, [timestamp])

@@ -28,7 +28,6 @@ function SideBar() {
     const projectNameRef = db.collection('userInfo')?.doc(projectNameObject?.id);
     // const [projectDetails] = useDocument(db.collection('rooms').doc(projectNameObject?.id))
 
-    console.log("projectNameObject", projectNameObject?.data().projectName)
     const [user] = useAuthState(auth); 
     const [showChannels, setShowChannels] = useState(false);
     const [showLess, setShowLess] = useState(false);
@@ -66,7 +65,6 @@ function SideBar() {
     }
 
     useEffect(() => {
-        console.log("projectNameObject.data().projectName in use effect", projectNameObject?.data().projectName)
         if (projectNameObject?.data().projectName) {
             setProjectName(projectNameObject?.data().projectName)
         }

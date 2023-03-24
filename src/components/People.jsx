@@ -23,7 +23,6 @@ function People() {
                             null
                         :
                         users?.docs.map((user) => (
-                            console.log("USER", user.data()),
                             <Row key={user.id}>
                                 <HeaderAvatar
                                     src={user.data().photoUrl}

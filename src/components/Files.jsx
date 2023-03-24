@@ -23,7 +23,6 @@ function Files() {
 
     const handleChange = (event) => {
         // setSelectedFile(event.target.files[0])
-        console.log("docs", event.target.files[0])
         if (event.target.files[0].type === "application/pdf" || event.target.files[0].type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document"){
             setIsDoc(true)
         } else {

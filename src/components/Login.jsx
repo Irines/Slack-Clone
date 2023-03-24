@@ -16,8 +16,6 @@ function Login() {
           .then((userCredential) => {
             // Signed in
             const user = userCredential.user;
-            console.log("user logged in", user)
-            console.log("user id", user.uid)
             if (user) {
                 dispatch(logIn({
                     userId: user.uid

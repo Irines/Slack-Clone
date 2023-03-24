@@ -62,7 +62,6 @@ export default function SearchModal({open, setOpen}) {
   };
 
   const onChangeHandler = event => {
-    console.log("search?")
     setSearch(event.target.value);
  };
 

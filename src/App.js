@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import styled from "styled-components";
 import {
@@ -19,7 +19,7 @@ import Files from './components/Files';
 
 function App() {
   const [user, loading] = useAuthState(auth);
-
+  
   if (loading){
     return(
       <Loading>
@@ -59,6 +59,7 @@ function App() {
 
 export default App;
 const Loading = styled.div`
+  margin: auto;
   display: grid;
   place-items: center;
   height: 100vh;

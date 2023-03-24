@@ -55,7 +55,6 @@ function EditProjectName({open, setOpen, name, handleNameEdit}) {
 
   useEffect(() => {
     setEditName(name);
-    console.log("use effect name, editName", name, editName)
   }, [name])
 
   const handleClose = () => {
