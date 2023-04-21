@@ -12,24 +12,25 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import FileElement from "./FileElement";
 
 function Files() {
-  const [users, loading, error] = useCollection(db.collection("users"));
-  const [selectedFile, setSelectedFile] = useState(null);
   const [isDoc, setIsDoc] = useState(false);
   const [files, setFileList] = useState([]);
-  const [uploaded, setUploaded] = useState(null);
+  const [loading, setLoading] = useState(true);
   const filePicker = useRef();
 
   useEffect(() => {
     // Retrieve file list from Firebase Storage and update state
-    getFiles().then((list) => {
+    getFiles()
+      .then((list) => {
         setFileList(list);
-    }).catch((error) => {
+        setLoading(false);
+      })
+      .catch((error) => {
         console.error(error);
-    });
+      });
   }, []);
 
   const getFiles = async () => {
-    const storageRef = storage.ref().child('Files');
+    const storageRef = storage.ref().child("Files");
     const fileList = [];
     try {
       const files = await storageRef.listAll();
@@ -37,7 +38,7 @@ function Files() {
         const downloadUrl = await fileRef.getDownloadURL();
         fileList.push({
           name: fileRef.name,
-          url: downloadUrl
+          url: downloadUrl,
         });
       }
     } catch (error) {
@@ -51,30 +52,30 @@ function Files() {
     filePicker.current.click();
   };
 
-  const handleChange = (event) => {
-    // setSelectedFile(event.target.files[0])
-    if (
-      event.target.files[0].type === "application/pdf" ||
-      event.target.files[0].type ===
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    ) {
-      setIsDoc(true);
-    } else {
-      setIsDoc(false);
+  const handleFileUpload = async (event) => {
+    const files = event.target.files;
+    try {
+      const uploadedFiles = [];
+      for (let file of files) {
+        uploadedFiles.push(await uploadFile(file));
+      }
+      setFileList((prevList) => [...prevList, ...uploadedFiles]);
+    } catch (error) {
+      console.error(error);
     }
-    setSelectedFile({
-      name: event.target.files[0].name,
-      url: URL.createObjectURL(event.target.files[0]),
-    });
   };
 
-  const handleUpload = async (params) => {
-    if (!selectedFile) {
-      alert("Please select a file");
-      return;
+  const uploadFile = async (file) => {
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(`Files/${Date.now()}-${file.name}`);
+    try {
+      const snapshot = await fileRef.put(file);
+      const downloadUrl = await snapshot.ref.getDownloadURL();
+      return { name: file.name, url: downloadUrl };
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
-    // send to database
-    // setUploaded(data)
   };
 
   return (
@@ -94,28 +95,13 @@ function Files() {
         <input
           type="file"
           ref={filePicker}
-          onChange={handleChange}
+          onChange={handleFileUpload}
           multiple
-          accept=".doc,.docx, .png, .jpeg, .pdf, .gif"
+          accept=".doc,.docx, .png, .jpg, .jpeg, .pdf, .txt, .gif"
         />
         <List>
+          {!loading & files.length ? (
             <FileElement fileList={files} />
-          {/* {selectedFile ? (
-            <Row>
-              <RowElement>
-                {isDoc ? (
-                  <>
-                    <img src="/images/File.png" />
-                    <p>{selectedFile.name}</p>
-                  </>
-                ) : (
-                  <>
-                    <img src={selectedFile.url} />
-                    <p>{selectedFile.name}</p>
-                  </>
-                )}
-              </RowElement>
-            </Row>
           ) : (
             <>
               <Row>
@@ -147,7 +133,7 @@ function Files() {
                 </RowElement>
               </Row>
             </>
-          )} */}
+          )}
         </List>
       </ListContainer>
     </PeopleContainer>

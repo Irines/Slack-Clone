@@ -16,11 +16,12 @@ const FileElement = ({ fileList }) => {
         } else if (file.name.match(/\.(doc|docx|pdf|txt)$/)) {
           // Render document file
           return (
-            <RowElement key={index}>
+            <RowElementColumnOrientation key={index}>
+              <img src="/images/File.png" className="png" alt="file" />
               <a href={file.url} target="_blank" rel="noopener noreferrer">
                 {file.name}
               </a>
-            </RowElement>
+            </RowElementColumnOrientation>
           );
         } else {
           // Render unknown file type
@@ -47,11 +48,40 @@ const Row = styled.div`
 const RowElement = styled.div`
   flex-grow: 0;
   width: 20%;
-  height: 180px;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  min-height: 180px;
+  min-width: 200px;
+  margin-right: 2em;
+  margin-bottom: 2em;
   > img {
     max-width: 100%;
     max-height: 100%;
   }
+  > a {
+    font-size: 14px;
+  }
+  > .png {
+    width: 50%;
+  }
+`;
+
+const RowElementColumnOrientation = styled.div`
+    flex-grow: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 20%;
+    min-height: 180px;
+    min-width: 200px;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    > img {
+    max-width: 100%;
+    max-height: 100%;
+    }
+    > a {
+    font-size: 14px;
+    }
+    > .png {
+    width: 50%;
+    }
 `;
