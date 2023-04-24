@@ -7,8 +7,8 @@ import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import QueueOutlinedIcon from "@mui/icons-material/QueueOutlined";
 import SkeletonElement from "./SkeletonElement";
 import { useRef } from "react";
-import { Viewer } from "@react-pdf-viewer/core";
-import "@react-pdf-viewer/core/lib/styles/index.css";
+// import { Viewer } from "@react-pdf-viewer/core";
+// import "@react-pdf-viewer/core/lib/styles/index.css";
 import FileElement from "./FileElement";
 
 function Files() {

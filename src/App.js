@@ -16,6 +16,7 @@ import Login from './components/Login';
 import Spinner from "react-spinkit";
 import People from './components/People';
 import Files from './components/Files';
+import SearchResults from './components/SearchResults';
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -47,6 +48,7 @@ function App() {
                       <Route path="/" element={<Chat/>}></Route>
                       <Route path="/people" element={<People/>}></Route>
                       <Route path="/files" element={<Files/>}></Route>
+                      <Route path="/results" element={<SearchResults/>}></Route>
                     </Routes>
                   </AppBody>
             </>

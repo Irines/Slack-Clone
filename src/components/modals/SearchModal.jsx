@@ -15,9 +15,8 @@ import TagOutlinedIcon from "@mui/icons-material/TagOutlined";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import FolderOpenIcon from "@mui/icons-material/FolderOpen";
 import "../styles/search-modal.css";
-import { db } from "../../firebase";
-import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -59,59 +58,16 @@ BootstrapDialogTitle.propTypes = {
 
 export default function SearchModal({ open, setOpen }) {
   const [search, setSearch] = useState("");
-  const [dataFromDB, setDataFromDB] = useState([]);
-  const [chatIdList, setChatIdList] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    getAllRoomsIds();
-  }, []);
-
-  useEffect(() => {
-    console.log("chatIdList 1", chatIdList);
-    getAllMessages();
-  }, [chatIdList]);
-
-  const getAllRoomsIds = async () => {
-    try {
-      const parentCollection = await db.collection("rooms").get();
-      debugger;
-      let idList = [];
-      parentCollection.forEach(
-        (doc) => idList.push(doc.id)
-      );
-      setChatIdList(idList);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getAllMessages = async () => {
-    try {
-      const parentCollectionRef = db.collection("rooms");
-      console.log("chatIdList 2", chatIdList);
-      chatIdList.forEach((chatId) => {
-        getNestedCollection(chatId, parentCollectionRef);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const getNestedCollection = async (chatId, parentCollectionRef) => {
-    const nestedCollectionRef = parentCollectionRef
-      .doc(chatId)
-      .collection("messages");
-
-    const querySnapshot = await nestedCollectionRef.get();
-
-    querySnapshot.forEach((doc) => {
-      console.log("messages", doc.id, " => ", doc.data());
-      setDataFromDB((prevData) => [...prevData, {...doc.data(), chatId}]);
+  const openSearchResults = () => {
+    navigate('/results', {
+      state: {
+        search: search,
+      }
     });
-  };
-
-  const openSearchResults = (params) => {
-    
+    clearSearch();
+    handleClose();
   }
 
   const handleClose = () => {
@@ -146,10 +102,10 @@ export default function SearchModal({ open, setOpen }) {
       </BootstrapDialogTitle>
       <DialogContent id="search-content">
         {search ? (
-          <div className="btn-search" onClick={openSearchResults}>
-            <SearchIcon style={{ fill: "white" }}></SearchIcon>
-            <p>{search} - Search messages, files and more</p>
-          </div>
+            <div className="btn-search" onClick={openSearchResults}>
+              <SearchIcon style={{ fill: "white" }}></SearchIcon>
+              <p>{search} - Search messages, files and more</p>
+            </div>
         ) : (
           <div className="options">
             <p>I'm looking for...</p>
@@ -171,7 +127,7 @@ export default function SearchModal({ open, setOpen }) {
         )}
       </DialogContent>
       <DialogActions>
-        <Button autoFocus onClick={handleClose}>
+        <Button autoFocus onClick={openSearchResults}>
           Search
         </Button>
       </DialogActions>
