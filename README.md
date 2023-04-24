@@ -15,6 +15,19 @@ Messages, logged in users and project name are stored in Google Firebase Realtim
 ![image](https://user-images.githubusercontent.com/48406339/204274688-5d48f967-9189-474d-9cb3-884423d96dae.png)
 ![image](https://user-images.githubusercontent.com/48406339/204274735-93314c56-0711-4199-bc7a-daca01b07c28.png)
 
-I will add private chats with logged in users soon.
+Update: users can search their messages in different chats now. Search was implemented with Firebase Realtime Database.
+
+![image](https://user-images.githubusercontent.com/48406339/234121346-f928c320-5699-4729-9e49-0c095e1f7c08.png)
+
+![image](https://user-images.githubusercontent.com/48406339/234121712-04306df4-c65a-4d7f-854a-229a43848489.png)
+
+Users also can upload .png, .jpeg, .docx, .gif files. They are being stored in Google CLoud Storage.
+
+
+
+
+
+
+
 
 
