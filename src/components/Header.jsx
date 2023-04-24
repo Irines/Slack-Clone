@@ -32,8 +32,8 @@ function Header() {
         };
     };
 
-    const openSearchModal = (params) => {
-        setOpen(true);
+    const openSearchModal = (param) => {
+        setOpen(param);
     }
 
     const popupHelp = usePopup(null)
@@ -46,7 +46,7 @@ function Header() {
 
     return (
         <>
-            <SearchModal open={open} setOpen={setOpen}></SearchModal>
+            <SearchModal open={open} setOpen={openSearchModal}></SearchModal>
             <HeaderComponent>
                 <HeaderLeft>
                     <HeaderAvatar
@@ -70,9 +70,9 @@ function Header() {
                 <HeaderSearch>
                     <SearchIcon></SearchIcon>
                     <input 
-                        onMouseEnter={popupSearch.handlePopoverOpen}
-                        onMouseLeave={popupSearch.handlePopoverClose}
-                        onMouseDown={openSearchModal}
+                        onMouseEnter={(event) => popupHelp.handlePopoverOpen(event)}
+                        onMouseLeave={(event) => popupHelp.handlePopoverClose(event)}
+                        onMouseDown={() => setOpen(true)}
                         type="text"
                         // value={search}
                         // onChange={onChangeHandler}
@@ -87,14 +87,14 @@ function Header() {
                 />
                 <HeaderRight>
                     <IconHelpWrapper
-                        onMouseEnter={popupHelp.handlePopoverOpen}
-                        onMouseLeave={popupHelp.handlePopoverClose}
+                        onMouseEnter={(event) => popupHelp.handlePopoverOpen(event)}
+                        onMouseLeave={(event) => popupHelp.handlePopoverClose(event)}
                     >                
                         <HelpIcon></HelpIcon>
                     </IconHelpWrapper>
                     <PopupBox 
                         open={openHelpPopover} 
-                        handlePopoverClose={popupHelp.handlePopoverClose} 
+                        handlePopoverClose={(event) => popupHelp.handlePopoverClose(event)}
                         anchorEl={popupHelp.anchorEl} 
                         content="Help"
                     />
