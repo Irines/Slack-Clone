@@ -37,6 +37,7 @@ body {
   --slack-color: #54205c;
   --slack-lighter: #85568c;
   --medium-grey: #6e6e6e;
+  --dark: #1d1c1d;
   /* Media breakpoints */
   --screen-phone-max: '600px';
   --screen-small-min: '768px';

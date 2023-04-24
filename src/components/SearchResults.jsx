@@ -13,15 +13,15 @@ import { hasContent } from "../utils/string";
 function SearchResults() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const searchString = location.state.search || '';
+  const searchString = location.state.search || "";
   const [dataFromDB, setDataFromDB] = useState([]);
   const [chatIdList, setChatIdList] = useState([]);
 
   useEffect(() => {
     setDataFromDB([]);
     if (searchString && hasContent(searchString)) {
-        getAllRoomsIds();
-    } 
+      getAllRoomsIds();
+    }
   }, [searchString]);
 
   useEffect(() => {
@@ -32,10 +32,8 @@ function SearchResults() {
     try {
       const parentCollection = await db.collection("rooms").get();
       let idList = [];
-      parentCollection.forEach(
-        (doc) => (
-          idList.push({ chatId: doc.id, chatName: doc.data().name })
-        )
+      parentCollection.forEach((doc) =>
+        idList.push({ chatId: doc.id, chatName: doc.data().name })
       );
       setChatIdList(idList);
     } catch (error) {
@@ -85,45 +83,70 @@ function SearchResults() {
       <SearchHeader>
         <h4>{`Search results for '${searchString}'`}</h4>
       </SearchHeader>
-      {dataFromDB.length 
-      ?
+      {dataFromDB.length ? (
         dataFromDB.map((result) => {
-            const { message, timestamp, user, userImage, chatName, chatId } = result;
-            return (
+          const { message, timestamp, user, userImage, chatName, chatId } =
+            result;
+          return (
             <Link to={`/`} key={chatId + message}>
-                <ResultsContainer onClick={() => SelectChannel(chatId)} key={chatId + message}>
+              <ResultsContainer
+                onClick={() => SelectChannel(chatId)}
+                key={chatId + message}
+              >
                 <h4>
-                    #{chatName} - <span>{getDate(timestamp)}</span>
+                  #{chatName} - <span>{getDate(timestamp)}</span>
                 </h4>
                 <MessageContainer>
-                    <img src={userImage} alt="user image" />
-                    <MessageInfo>
+                  <img src={userImage} alt="user image" />
+                  <MessageInfo>
                     <h4>
-                        {user} <span>{getTime(timestamp)}</span>
+                      {user} <span>{getTime(timestamp)}</span>
                     </h4>
                     <p>{message}</p>
-                    </MessageInfo>
+                  </MessageInfo>
                 </MessageContainer>
-                </ResultsContainer>
+              </ResultsContainer>
             </Link>
-            )
+          );
         })
-    :
-            (
-                <ResultsContainer>
-                <h4>
-                    No results found
-                </h4>
-                </ResultsContainer>
-            )
-      }
+      ) : (
+        <NoResults>
+          <h4>No results were found</h4>
+          <h4 className="light-text">You may want to try using different keywords, checking for typos or adjusting your filters.</h4>
+        </NoResults>
+      )}
     </SearchContainer>
   );
 }
 
 export default SearchResults;
 
-// const NoResults = styled.div
+const NoResults = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 200px;
+  width: 400px;
+  margin-left: calc(50% - 200px);
+  margin-top: 100px;
+  align-self: center;
+  align-content: center;
+  border-radius: 8px;
+  border: 1px solid lightgrey;
+  > h4 {
+    padding: 5%;
+    border-radius: 8px;
+    color: var(--dark);
+    font-weight: 600;
+  }
+  > .light-text {
+    padding-top: 0;
+    color: var(--medium-grey);
+    font-weight: 600;
+    /* font-size: 13px; */
+  }
+`;
 
 const SearchContainer = styled.div`
   flex: 0.7;
@@ -139,7 +162,7 @@ const SearchHeader = styled.div`
   padding: 20px;
   border-bottom: 1px solid lightgrey;
   > h4 {
-    color: var(--medium-grey);
+    color: var(--dark);
     font-weight: 600;
   }
 `;
